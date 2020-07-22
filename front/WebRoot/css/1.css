@@ -1,0 +1,15 @@
+#top{
+	height:69%;
+	width:99%
+}
+#bottom{
+	height:29%;
+	width:99%
+}
+#main{
+	width:100%; 
+	height:870px; 
+	overflow:hidden;
+	margin:0;
+	padding:0;
+}
