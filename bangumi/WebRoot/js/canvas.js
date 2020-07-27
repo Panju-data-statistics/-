@@ -62,10 +62,10 @@ var tree = document.getElementById("tree");
         var len = flowerList.length ;
         function step(){
             // flowerList.push({x:Math.random()*flower.width,y:0,sx:(Math.random()-0.5),sy:0,color:color,r:r,deg:deg});
-            if(Math.random() > 0.3)    fallList.push(flowerList[Math.floor(Math.random()*len)]);//随机取出一个，花瓣复制到飘落花瓣的列表中
+            if(Math.random() > 0.9)    fallList.push(flowerList[Math.floor(Math.random()*len)]);//随机取出一个，花瓣复制到飘落花瓣的列表中
         
             cxt.clearRect(0,0,flower.width,flower.height);
-            for(var i = 0 ;i < fallList.length ; i ++){
+            for(var i = 0 ;i < fallList.length; i ++){
                 if(fallList[i].sy < limitSpeedY) fallList[i].sy += g ;
                 fallList[i].sx += gWind ;
                 fallList[i].x += fallList[i].sx ;

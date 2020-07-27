@@ -19,5 +19,20 @@
 			<attribute name="owner.project.facets" value="jst.web.jstl"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebRoot/jar/mysql-connector-java-5.1.28.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jackson-annotations-2.5.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jackson-core-2.5.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jackson-databind-2.5.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/jstl-1.1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/jar/servlet-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

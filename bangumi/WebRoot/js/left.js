@@ -10,16 +10,17 @@ $(function() {
 	
 	//获取统计数据
 	$.ajax({
-		url: "data/count-data.json",
+		url: "http://127.0.0.1:8080/bangumi/statisticServlet",
 		dataType: "json"
 	}).done(function(data) {
 		//console.log('Data: ', data);
-		rollNum("listedCompany", 0, data.listed_companies_total);
-		rollNum("listedSecurity", 0, data.listed_securities_total);
-		rollNum("totalMarket", 0, data.total_market_value, 2);
-		rollNum("circulationMarket", 0, data.circulation_market_value, 2);
-		rollNum("shRatio", 0, data.sh_pe_ratio, 2);
-		rollNum("szRatio", 0, data.sz_pe_ratio, 2);
+		rollNum("listedCompany", 0, data.people);
+		rollNum("listedSecurity", 0, data.serial);
+		rollNum("totalMarket", 0, data.coins);
+		rollNum("circulationMarket", 0, data.danmakus);
+		rollNum("shRatio", 0, data.comment);
+		rollNum("szRatio", 0, data.views);
+		
 	}).fail(function(jqXHR, textStatus) {
 		console.log("Ajax Error: ", textStatus);
 	});
@@ -38,7 +39,7 @@ $(function() {
 				const suffix = '<span style="margin-left:5px;font-size:12px;">亿元</span>';
 				return param.name + "<br />" +
 					marker + "排名：" + (param.dataIndex+1) + "<br />" +
-					marker + "市价总值：" + param.value + suffix;
+					marker + "热度总值：" + param.value + suffix;
 			}
 		},
 		grid: {
@@ -61,7 +62,7 @@ $(function() {
 			}
 		},
 		series: [{
-			name: "市价总值排行",
+			name: "番剧热度总值排行",
 			type: "bar",
 			barCategoryGap: "60%",
 			label: {
@@ -99,7 +100,7 @@ $(function() {
 	};
 	rankChart.setOption(rankChartOpt);
 	$.ajax({
-		url: "data/ranking-list.json",
+		url: "http://127.0.0.1:8080/bangumi/rankSevlet",
 		dataType: "json"
 	}).done(function() {
 		$("#rankChart").addClass("chart-done");
@@ -108,15 +109,15 @@ $(function() {
 		const xData = [];
 		const yData = [];
 		for(let i in data) {
-			xData.push(data[i].market_capitalization);
-			yData.push(data[i].stock_name);
+			xData.push(data[i].hot);
+			yData.push(data[i].title);
 		}
 		rankChart.setOption({
 			yAxis: {
 				data: yData
 			},
 			series: [{
-				name: "市价总值排行",
+				name: "热度总值排行",
 				data: xData
 			}]
 		});
@@ -232,7 +233,7 @@ $(function() {
 				color: "#b0c2f9"
 			}
 		},
-		yAxis: [{
+		yAxis: {
 			name: "金额",
 			type: "value",
 			splitNumber: 5,
@@ -245,26 +246,28 @@ $(function() {
 				fontSize: 12,
 				color: "#b0c2f9",
 				formatter: (value, index) => {
-					return parseInt(value / 10000) + "万亿";
+					return parseInt(value ) + "万亿";
 				}
 			}
-		}, {
-			name: "市盈率",
-			type: "value",
-			splitNumber: 5,
-			maxInterval: 5,
-			minInterval: 5,
-			interval: 5,
-			axisLine: {
-				lineStyle: {color: "#b0c2f9"}
-			},
-			splitLine: {show: false},
-			axisTick: {color: "#b0c2f9"},
-			axisLabel: {
-				fontSize: 12,
-				color: "#b0c2f9"
-			}
-		}],
+		}
+		// {
+		// 	name: "市盈率",
+		// 	type: "value",
+		// 	splitNumber: 5,
+		// 	maxInterval: 5,
+		// 	minInterval: 5,
+		// 	interval: 5,
+		// 	axisLine: {
+		// 		lineStyle: {color: "#b0c2f9"}
+		// 	},
+		// 	splitLine: {show: false},
+		// 	axisTick: {color: "#b0c2f9"},
+		// 	axisLabel: {
+		// 		fontSize: 12,
+		// 		color: "#b0c2f9"
+		// 	}
+		// }
+	,
 		visualMap: {
 			show: false,
 			seriesIndex: 2,
@@ -285,7 +288,7 @@ $(function() {
 			barCategoryGap: "40%",
 			itemStyle: {
 				color: function(params) {
-					if(params.dataIndex >= 10) {
+					if(params.dataIndex >= 24) {
 						return "rgba(119, 96, 246, 0.5)";
 					}
 					return "rgba(119, 96, 246, 1)";
@@ -302,7 +305,7 @@ $(function() {
 			},
 			markLine: {
 				lineStyle: {
-					color: "rgba(119, 96, 246, 1)"
+					color: "rgba(255,20,147)"
 				},
 				label: {
 					position: "middle",
@@ -313,14 +316,15 @@ $(function() {
 					type: "average"
 				}]
 			}
-		}, {
+		},
+		 {
 			name: "成交总额",
 			type: "pictorialBar",
 			symbol: 'path://d="M150 50 L130 130 L170 130  Z"',
 			barCategoryGap: "40%",
 			itemStyle: {
 				color: function(params) {
-					if(params.dataIndex >= 10) {
+					if(params.dataIndex >= 24) {
 						return "rgba(230, 182, 0, 0.5)";
 					}
 					return "rgba(230, 182, 0, 1)";
@@ -337,7 +341,7 @@ $(function() {
 			},
 			markLine: {
 				lineStyle: {
-					color: "rgba(230, 182, 0, 1)"
+					color: "rgba(230, 182, 200, 1)"
 				},
 				label: {
 					position: "middle",
@@ -348,15 +352,18 @@ $(function() {
 					type: "average"
 				}]
 			}
-		}, {
-			name: "平均市盈率",
-			type: "line",
-			yAxisIndex: 1
-		}]
+		}
+		// , {
+		// 	name: "平均市盈率",
+		// 	type: "line",
+		
+		// 	yAxisIndex: 1
+		// }
+	]
 	};
 	trendChart.setOption(trendChartOpt);
 	$.ajax({
-		url: "data/month-count.json",
+		url: "http://127.0.0.1:8080/bangumi/peopleServlet",
 		dataType: "json"
 	}).done(function() {
 		$("#trendChart").addClass("chart-done");
@@ -367,10 +374,10 @@ $(function() {
 		const yData2 = [];
 		const yData3 = [];
 		for(let i in data) {
-			xData.push(data[i].month);
-			yData1.push(data[i].sh_market_capitalization);
-			yData2.push(data[i].sh_transaction_amount);
-			yData3.push(data[i].sh_pe_ratio);
+			xData.push(data[i].time);
+			yData1.push(data[i].max_number);
+			yData2.push(data[i].min_number);
+			// yData3.push(data[i].max_number);
 		}
 		trendChart.setOption({
 			xAxis: {
@@ -382,10 +389,12 @@ $(function() {
 			}, {
 				name: "成交总额",
 				data: yData2
-			}, {
-				name: "平均市盈率",
-				data: yData3
-			}]
+			}
+			// , {
+			// 	name: "平均市盈率",
+			// 	data: yData3
+			// }
+		]
 		});
 	}).fail(function(jqXHR) {
 		console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
@@ -421,7 +430,7 @@ $(function() {
 	};
 	csrcChart.setOption(csrcChartOpt);
 	$.ajax({
-		url: "data/csrc-industry.json",
+		url: "http://127.0.0.1:8080/bangumi/styleServlet",
 		dataType: "json"
 	}).done(function() {
 		$("#csrcChart").addClass("chart-done");
@@ -430,8 +439,8 @@ $(function() {
 		const chartData = [];
 		for(let i in data) {
 			chartData.push({
-				name: data[i].alias,
-				value: data[i].stock
+				name: data[i].tag,
+				value: data[i].tag_number
 			});
 		}
 		csrcChart.setOption({
@@ -447,7 +456,7 @@ $(function() {
 	//浏览器窗口大小变化时，重置报表大小
 	$(window).resize(function() {
 		rankChart.resize();
-		mapChart.resize();
+		// mapChart.resize();
 		trendChart.resize();
 		csrcChart.resize();
 	});

@@ -5,7 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html >
   <head>
   
     
@@ -19,63 +19,108 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/MainStyle.css" />
 
   </head>
-  <body>
-		<div class="header">
-			<h1 class="header-title">番剧数据统计-123</h1>
+	<body>
+		<header id="header">
+			<h3 class="header-title">番剧数据统计</h3>
+			<div class="header-info header-info-l">数据来源：Bilibili &amp; Acfun</div>
+			<div class="header-info header-info-r">数据日期：<span id="nowDate"></span></div>
+		</header>
+		<!-- <div id="canvas-container">
+			<canvas id="tree">asdasas</canvas>
+			<canvas id="flower"></canvas>
+		</div> -->
+		<div class="canvas" style="opacity: .2;width: 100%;height: 100%;">
+			<iframe frameborder="0" src="js/index.html" style="width: 100%; height: 100%"></iframe>
 		</div>
-		<div id="canvas-container">
-		  		<canvas id="tree">asdasas</canvas>
-		  		<canvas id="flower"></canvas>
-          </div>
-          
-		<div class="wrapper">
-			<div class="content">
-				<div class="col col-l">
-					<div class="xpanel-wrapper xpanel-wrapper-55">
-						<div class="xpanel xpanel-l-t">
-                            <div class="title">番剧总排行榜</div>
-                            <div class="chart-div" id="rankChart">
-                        </div>
-						</div>
-					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-45">
-						<div class="xpanel xpanel-l-b">
-							<div class="title">标签分类图</div>
-							<div class="chart-div" id="csrcChart">
-								<div class="chart-loader"><div class="loader"></div></div>
+		
+		<footer id="footer"></footer>
+		
+		<div id="container">
+			<div id="flexCon">
+				<div class="flex-row">
+					
+					<div class="flex-cell flex-cell-l">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">番剧排行Top10</h3>
+							<div class="chart-div" id="rankChart">
+								<div class="chart-loader">
+									<div class="loader"></div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col col-c">
-					<div class="xpanel-wrapper xpanel-wrapper-55">
-						<div class="xpanel no-bg">
+					<div class="flex-cell flex-cell-c" style="padding-right:0;">
+						<div class="map1">
+							<img style="margin: 0 auto;height: 600px;height: 600px;" id="img1"src="imgs/mfz3.png">
+						</div>
+						<div class="chart-wrapper">
+							<h3 class="chart-title">统计数据</h3>
+							<div class="chart-div chart-done">
+								<table class="data-t">
+									<tr>
+										<th ><img style="height: 50px;width: 50px;"src="imgs/xm1.png" /></th>
+										<td>
+											<p><span id="listedCompany">0</span></p>
+											<p>在线人数</p>
+										</td>
+										<th><img style="height: 50px;width: 50px;"src="imgs/xm2.png" /></th>
+										<td>
+											<p><span id="listedSecurity">0</span></p>
+											<p>正在连载</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img style="height: 50px;width: 50px;"src="imgs/xm3.png" /></th>
+										<td>
+											<p><span id="totalMarket">0</span></p>
+											<p>新增投币量</p>
+										</td>
+										<th><img style="height: 50px;width: 50px;"src="imgs/xm4.png" /></th>
+										<td>
+											<p><span id="circulationMarket">0</span></p>
+											<p>新增弹幕量</p>
+										</td>
+									</tr>
+									<tr>
+										<th><img style="height: 50px;width: 50px;"src="imgs/xm5.png" /></th>
+										<td>
+											<p><span id="shRatio">0</span></p>
+											<p>新增评论量</p>
+										</td>
+										<th><img style="height: 50px;width: 50px;"src="imgs/xm6.png" /></th>
+										<td>
+											<p><span id="szRatio">0</span></p>
+											<p>新增播放量</p>
+										</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-45">
-						<div class="xpanel xpanel-c-b">
-							<div class="title title-long"></div>
+					<div class="flex-cell flex-cell-r" style="padding-left:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">制作公司排行榜</h3>
+							<div class="chart-div" id="echart5">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div> 
+						</div>
+					</div>
+				</div>
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-lc" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">各个时段在线人数</h3>
 							<div class="chart-div" id="trendChart">
 								<div class="chart-loader"><div class="loader"></div></div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col col-r">
-					<div class="xpanel-wrapper xpanel-wrapper-25">
-						<div class="xpanel xpanel-r-t">
-							<div class="title"></div>
-						</div>
-					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-30">
-						<div class="xpanel xpanel-r-m">
-							<div class="title"></div>
-						</div>
-					</div>
-					<div class="xpanel-wrapper xpanel-wrapper-45">
-						<div class="xpanel xpanel-r-b">
-							<div class="title"></div>
-
+					<div class="flex-cell flex-cell-r" style="padding-bottom:0;">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">风格统计</h3>
+							<div class="chart-div" id="csrcChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -88,5 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="js/echarts-map-china.js"></script>
 		<script type="text/javascript" src="js/echarts-theme-shine.js"></script>
 		<script src="js/left.js"></script>
+		<script src="js/middle.js"></script>
+		<script type="text/javascript" src="js/echarts.js"></script>
 	</body>
 </html>

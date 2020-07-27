@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>rankSevlet</servlet-name>
+    <servlet-class>bangumi.rankSevlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>peopleServlet</servlet-name>
+    <servlet-class>bangumi.peopleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>statisticServlet</servlet-name>
+    <servlet-class>bangumi.statisticServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>companyServlet</servlet-name>
+    <servlet-class>bangumi.companyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>styleServlet</servlet-name>
+    <servlet-class>bangumi.styleServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>rankSevlet</servlet-name>
+    <url-pattern>/rankSevlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>peopleServlet</servlet-name>
+    <url-pattern>/peopleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>statisticServlet</servlet-name>
+    <url-pattern>/statisticServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>companyServlet</servlet-name>
+    <url-pattern>/companyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>styleServlet</servlet-name>
+    <url-pattern>/styleServlet</url-pattern>
+  </servlet-mapping>
+
+</web-app>
