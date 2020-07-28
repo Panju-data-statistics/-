@@ -93,9 +93,9 @@ public class companyServlet extends HttpServlet {
 			  
 	  
 				
-				System.out.println(company);
+				//System.out.println(company);
 				
-				
+				response.setContentType("text/html;charset=UTF-8");
 				response.getWriter().print(company);
 	}
 

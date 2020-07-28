@@ -91,6 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<td>
 											<p><span id="szRatio">0</span></p>
 											<p>新增播放量</p>
+											
 										</td>
 									</tr>
 								</table>

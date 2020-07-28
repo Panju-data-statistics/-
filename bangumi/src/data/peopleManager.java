@@ -19,29 +19,30 @@ public class peopleManager {
 		ResultSet rs = null;
 		lists = new ArrayList();
 		try {
-			/*Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		
-			conn = DriverManager.getConnection("jdbc:mysql://192.168.52.110:3306/tclmall","root","123456");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/anime","root","545811");
 			
 			
 			stmt = conn.createStatement();
 			
-			 rs = stmt.executeQuery("select * from  ads_gmv_sum_day");
+			 rs = stmt.executeQuery("SELECT * FROM  online WHERE time >= 0");
 			
 			
-			while(rs.next()){*/
-				for (int i=0;i<24;i++)
-				{
-					People people = new People();
+			while(rs.next()){
+				
+				People people = new People();
+				people.setTime(rs.getString("time"));
+				people.setMax_number(rs.getString("max_number"));
+				people.setMin_number(rs.getString("min_number"));
 				
 				//gmv.setDt(rs.getString("dt"));
 				
-					people.setTime("11");
-					people.setMax_number("20");
+					//people.setTime("11");
+					//people.setMax_number("20");
 					// people.setAvg_number("80");
-					people.setMin_number("10");
-					lists.add(people);
-				}
+					//people.setMin_number("10");
+				lists.add(people);
 				// People people = new People();
 				
 				// //gmv.setDt(rs.getString("dt"));
@@ -59,7 +60,7 @@ public class peopleManager {
 				// lists.add(people);
 				// lists.add(people1);
 				
-			//}
+			}
 			
 			
 			

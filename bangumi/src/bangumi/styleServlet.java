@@ -91,10 +91,9 @@ public class styleServlet extends HttpServlet {
 			// json.put("provinceName2", "Beiijng");
 			
 	
-			System.out.println("!!!!!!!!!!!!!");
-			System.out.println(style);
+			//System.out.println(style);
 			
-			
+			response.setContentType("text/html;charset=UTF-8");
 			response.getWriter().print(style);
 	
 	}

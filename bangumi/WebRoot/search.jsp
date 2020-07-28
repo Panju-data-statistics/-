@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a href="#">更多&gt;&gt;</a> -->
 		</nav>
 		<div class="searchBox">
-			<form action="searchSevelt" method="get">
+			<form action="searchServlet" method="get">
 				<input type="text" class="searchIpt f14" name="wd" maxlength="200" autocomplete="off"/>
 				<input type="submit" class="btn cp" value="搜索番剧" />
 			</form>

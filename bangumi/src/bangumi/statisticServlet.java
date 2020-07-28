@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 import com.google.gson.Gson;
+
 import data.statisticManager;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -56,9 +59,11 @@ public class statisticServlet extends HttpServlet {
 		  
 		  Gson gson = new Gson();
 
-			
 		  String statistics = gson.toJson(lists);
 		  
+		  //System.out.println(statistics);
+		  
+		  response.setContentType("text/html;charset=UTF-8");
 		  response.getWriter().print(statistics);
 	}
 

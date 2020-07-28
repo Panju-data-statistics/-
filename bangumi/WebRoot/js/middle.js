@@ -112,3 +112,16 @@ myChart.setOption(option);
     }).fail(function(jqXHR) {
         console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
     });
+
+    // $.ajax({
+    //     type : "POST",
+    //     async : true, 
+    //     url : "http://127.0.0.1:8080/bangumi/peopleServlet",
+    //     dataType : "JSON",
+    //     success : function(data) {
+    //         document.getElementById('pic').src=data.time;
+            
+            
+    
+    //         }
+    // })

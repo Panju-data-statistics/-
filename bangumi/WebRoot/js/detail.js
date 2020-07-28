@@ -1,115 +1,28 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
+$(function () {
+echarts_1();
+echarts_2();
+function echarts_1() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main3'));
+        var dts = [];
+        var gmvamounts = [];
+    	$.ajax({
+    		type : "GET",
+    		async : true, 
+    		url : "http://127.0.0.1:8080/bangumi/searchServlet",
+    		dataType : "JSON",
+    		success : function(data) {
 
-<!doctype html>
-<html>
-<head>
-<title>番剧详细页</title>
-<!--设置是否为缩放模式 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 新 Bootstrap 核心 CSS 文件 --> 
-<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
-<script src="js/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
-<script src="js/bootstrap.min.js"></script>
-<!--echarts JS-->
-<script src="js/echarts.min.js"></script>
-<!-- 轮播swiper文件 -->
-<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
-<script src="js/swiper.min.js"></script>
-<!--界面样式-->
-
-<script src="js/china.js"></script>
-<script src="js/chartMap.js"></script>
-<link rel="stylesheet" type="text/css" href="css/visual.css">
-
-</head>
-<body class="ksh" style="background-image: url(img/data08.png);">
-	<!-- style="background-image: url(img/data08.png);"	 -->
-	
-	<div class="visual">
-		<div class="visual_left">
-			<div class="visual_box">
-				<div style="height:100%;width:40%;float:left">
-				<img style="height:300px;width:225px;margin-top: 20px;"  id="pic1" ></img></div>
-				<div style="height:100%;width:55%;float: right;margin: 10px auto;">
-				  <br><br><br>
-				  <nobr style="display:inline;font-size:22px;color: rgb(214, 214, 255)">剧名:</nobr> 
-				  <p style="display:inline;font-size:18px;color: rgb(239, 255, 205)" id="text1">
-					${requestScope.title}
-				 </p><br><br>
-				  <p style="display:inline;font-size:22px;color: rgb(214, 214, 255)">类别:</p>
-				  <p style="display:inline;font-size:18px;color: rgb(239, 255, 205);" id="text2">
-					${requestScope.tag}
-				  </p><br><br>
-				  <p style="display:inline;font-size:22px;color: rgb(214, 214, 255)">连载情况:</p>
-				  <p style="display:inline;font-size:18px;color: rgb(239, 255, 205);" id="text3">
-					${requestScope.is_finish}
-				  </p><br><br>
-				  <p style="display:inline;font-size:22px;color: rgb(214, 214, 255)">评分:</p>
-				  <p style="display:inline;font-size:18px;color: rgb(239, 255, 205)" id="text4">
-					${requestScope.score}
-				  </p><br><br>
-				  
-				</div>
-			</div>
-			<div class="visual_box">
-				<br><br>
-				<div>
-					<title style="display:inline;font-size:22px;color: rgb(214, 214, 255)">简介:</title>
-				</div>
+				gmvamounts[0]=data[0].followX;
+				gmvamounts[1]=data[0].coinsX;
+				gmvamounts[2]=data[0].danmakusX;
+				gmvamounts[3]=data[0].commentX;
+				gmvamounts[4]=data[0].viewsX;
 				
-				<p style="display:inline;font-size:18px;color: white" id="text">
-					${requestScope.intro}
-				</p>
-			</div>
-			<div class="visual_box">
-				
-			</div>
-		</div>
-		
-		<div class="visual_right">
-			<div class="visual_box">
-				<div class="visual_title">
-					<span>综合数据</span>
-					<img src="img/ksh33.png">
-				</div>
-				<div class="swiper-container visual_swiper1 visual_chart">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide"  id="main3"></div>
-					</div>
-				</div>
-			</div>
-			<div class="visual_box visualSfzsfl">
-				<div class="visual_title">
-					<span>热度走势</span>
-					<img src="img/ksh33.png">
-				</div>
-				    <div class="visual_chart" id="main2">
-					
-				</div>
-					
-				</div>
-			</div>
-	
-		</div>
-		
-	</div>
-	<script src="js/detail.js"></script>
-	<script>
-		var img="${requestScope.cover}";
-		// var img="imgs/xm8.png";
-		document.getElementById('pic1').src=img;
-	</script>
-	<script>
-		var gmvamounts = [];
-		gmvamounts[0]="${requestScope.coinsX}";
-		gmvamounts[1]="${requestScope.followX}";
-		gmvamounts[2]="${requestScope.danmakusX}";
-		gmvamounts[3]="${requestScope.commentX}";
-		gmvamounts[4]="${requestScope.viewsX}";
-		 option = {
+	      			
+	              
+				    option = {
 				  //  backgroundColor: '#00265f',
 				    		tooltip: {
 				    	        show: true,
@@ -134,11 +47,9 @@
 				    	            fontWeight: "normal"
 				    	        },
 				    	        axisLine: {
-									show: true,
-									
+				    	            show: true,
 				    	            lineStyle: {
-										color: "rgba(248,248,255)",
-										fontSize:30
+				    	                color: "rgba(255, 255, 255, 0.5)"
 				    	            }
 				    	        },
 				    	        splitLine: {
@@ -158,7 +69,7 @@
 				    	    series: [{
 				    	        type: "radar",
 				    	        data: [{value:gmvamounts,
-				    	        	name: "番剧综合评估",
+				    	        	name: "告警类型TOP5",
 				    	            symbol: 'none',
 				    	            lineStyle: {
 				    	                normal: {
@@ -182,26 +93,56 @@
 				    	              }]
 				    	    }]
 				};
-		var myChart = echarts.init(document.getElementById("main3"));
+				       
+       
+       
+      
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.addEventListener("resize",function(){    myChart.resize();   });
+        
+        
+        
+    			}
 
-//使用制定的配置项和数据显示图表
-		myChart.setOption(option);
-	</script>
-	<script>
-		var myChart = echarts.init(document.getElementById('main2'));
-		var gmvamounts = [];
-		gmvamounts[0]="${requestScope.hot1}";
-		gmvamounts[1]="${requestScope.hot2}";
-		gmvamounts[2]="${requestScope.hot3}";
-		gmvamounts[3]="${requestScope.hot4}";
-		gmvamounts[4]="${requestScope.hot5}";
-		option = {
+	});
+
+}
+        
+        
+        
+        
+
+
+
+
+
+function echarts_2() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main2'));
+        var dts = [];
+        var gmvamounts = [];
+    	$.ajax({
+    		type : "POST",
+    		async : true, 
+    		url : "http://127.0.0.1:8080/echartsDemo/zhe",
+    		dataType : "JSON",
+    		success : function(data) {
+
+    			for(var i = 0;i<data.length;i++){
+	      				
+    				dts[i]= data[i].dt;
+	      				
+    				gmvamounts[i] = data[i].gmvAmount;
+    				
+	      		}
+       option = {
   //  backgroundColor: '#00265f',
     		   tooltip: {//鼠标指上时的标线
     		        trigger: 'axis',
     		        axisPointer: {
     		            lineStyle: {
-    		                color: 'rgba(248,248,255)'
+    		                color: '#fff'
     		            }
     		        }
     		    },
@@ -210,12 +151,12 @@
     		        itemWidth: 14,
     		        itemHeight: 5,
     		        itemGap: 13,
-    		        data: ['热度值'],
+    		        data: ['中型车'],
     		        right: '10px',
     		        top: '0px',
     		        textStyle: {
     		            fontSize: 12,
-    		            color: 'rgba(248,248,255)'
+    		            color: '#fff'
     		        }
     		    },
     		    grid: {
@@ -226,19 +167,18 @@
     		    },
     		    xAxis: [{
     		        type: 'category',
-					boundaryGap: false,
-					
+    		        boundaryGap: false,
     		        axisLine: {
     		            lineStyle: {
-    		                color: 'rgba(248,248,255)'
+    		                color: '#57617B'
     		            }
     		        },
     		        axisLabel: {
     		            textStyle: {
-    		                color:'rgba(248,248,255)',
+    		                color:'#fff',
     		            },
     		        },
-    		        data:['第一天', '第二天', '第三天', '第四天', '第五天','第六天']
+    		        data:['第一天', '第二天', '第三天', '第四天', '第五天']
     		    }],
     		    yAxis: [{
     		        type: 'value',
@@ -247,7 +187,7 @@
     		        },
     		        axisLine: {
     		            lineStyle: {
-    		                color: 'rgba(248,248,255)'
+    		                color: '#57617B'
     		            }
     		        },
     		        axisLabel: {
@@ -256,7 +196,7 @@
     		                fontSize: 14
     		            },
     		            textStyle: {
-    		                color:'rgba(248,248,255)',
+    		                color:'#fff',
     		            },
     		        },
     		        splitLine: {
@@ -266,7 +206,7 @@
     		        }
     		    }],
     		    series: [{
-    		        name: '热度',
+    		        name: '中型车',
     		        type: 'line',
     		        smooth: true,
     		        lineStyle: {
@@ -278,7 +218,7 @@
     		            normal: {
     		                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
     		                    offset: 0,
-    		                    color: 'rgba(248,248,255)'
+    		                    color: 'rgba(0, 136, 212, 0.3)'
     		                }, {
     		                    offset: 0.8,
     		                    color: 'rgba(0, 136, 212, 0)'
@@ -292,7 +232,7 @@
     		                color: 'rgb(0,136,212)'
     		            }
     		        },
-    		        data:gmvamounts
+    		        data:gmvamounts//[97.3,99.2,99.3,100.0,99.6,90.6,80.0,91.5,69.8,67.5,90.4,84.9]
     		    },  ]
 };
       
@@ -301,6 +241,27 @@
         window.addEventListener("resize",function(){
             myChart.resize();
         });
-	</script>
-</body>
-</html>
+   			}
+
+    	});
+    }
+
+})
+
+
+
+		
+		
+		
+
+
+		
+
+
+
+
+
+
+
+
+

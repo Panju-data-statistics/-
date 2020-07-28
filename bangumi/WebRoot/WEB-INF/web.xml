@@ -33,6 +33,13 @@
     <servlet-name>styleServlet</servlet-name>
     <servlet-class>bangumi.styleServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchServlet</servlet-name>
+    <servlet-class>bangumi.searchServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -57,6 +64,10 @@
   <servlet-mapping>
     <servlet-name>styleServlet</servlet-name>
     <url-pattern>/styleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>searchServlet</servlet-name>
+    <url-pattern>/searchServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -1,5 +1,6 @@
 package data;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,28 +17,35 @@ public class statisticManager {
 		ResultSet rs = null;
 		lists = new ArrayList();
 		try {
-			/*Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		
-			conn = DriverManager.getConnection("jdbc:mysql://192.168.52.110:3306/tclmall","root","123456");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/anime","root","545811");
 			
 			
 			stmt = conn.createStatement();
 			
-			 rs = stmt.executeQuery("select * from  ads_gmv_sum_day");
+			 rs = stmt.executeQuery("SELECT people,serial,coins,danmakus,comment,views FROM statistic");
 			
 			
-			while(rs.next()){*/
+			while(rs.next()){
 				
 				Statistic statistic = new Statistic();
 				
+				statistic.setPeople(rs.getString("people"));
+				statistic.setSerial(rs.getString("serial"));
+				statistic.setCoins(rs.getString("coins"));
+				statistic.setDanmakus(rs.getString("danmakus"));
+				statistic.setComment(rs.getString("comment"));
+				statistic.setViews(rs.getString("views"));
+				
 				//gmv.setDt(rs.getString("dt"));
 				
-				statistic.setPeople("1233");
-				statistic.setCoins("9899");
-				statistic.setViews("123");
-				statistic.setComment("33");
-				statistic.setDanmakus("23232");
-				statistic.setSerial("1233123");
+//				statistic .setPeople("1233");
+//				statistic .setCoins("9899");
+//				statistic.setCoins("22");
+//				statistic.setComment("33");
+//				statistic.setDanmakus("23232");
+//				statistic.setSerial("1233123");
 				// Rank rank1 = new Rank();
 				// rank1.setName("ccc");
 				// rank1.setHot("2345");
@@ -48,7 +56,7 @@ public class statisticManager {
 				lists.add(statistic);
 				// lists.add(rank1);
 				
-			//}
+			}
 			
 			
 			

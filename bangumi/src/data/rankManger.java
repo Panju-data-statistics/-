@@ -29,11 +29,7 @@ public class rankManger {
 			
 			stmt = conn.createStatement();
 			
-			 rs = stmt.executeQuery(""
-			 		+ "SELECT title,"
-			 		+ "((views / 1000 * 0.1)/ ep_num + coins * 0.3 + follow * 0.2 + reply * 0.1 + (danmakus * 0.05) / ep_num) as hot "
-			 		+ "FROM ban "
-			 		+ "ORDER BY ((views / 1000 * 0.1)/ ep_num + coins * 0.3 + follow * 0.2 + reply * 0.1 + (danmakus * 0.05) / ep_num) DESC");
+			 rs = stmt.executeQuery("SELECT title,hot FROM rank LIMIT 0,10");
 		
 			while(rs.next()){
 				
@@ -42,7 +38,7 @@ public class rankManger {
 				String title = rs.getString("title");
 				rank.setTitle(title);
 				
-				String hot = Integer.toString(Double.valueOf(rs.getDouble("hot")).intValue());
+				String hot = rs.getString("hot");
 				rank.setHot(hot);
 				
 				//System.out.println(rank.getTitle());
@@ -84,7 +80,7 @@ public class rankManger {
 			*/
 		}
 		
-		System.out.println(lists);
+		//System.out.println(lists);
 		return lists;
 	}
 

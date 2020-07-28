@@ -14,16 +14,22 @@ $(function() {
 		dataType: "json"
 	}).done(function(data) {
 		//console.log('Data: ', data);
-		rollNum("listedCompany", 0, data.people);
-		rollNum("listedSecurity", 0, data.serial);
-		rollNum("totalMarket", 0, data.coins);
-		rollNum("circulationMarket", 0, data.danmakus);
-		rollNum("shRatio", 0, data.comment);
-		rollNum("szRatio", 0, data.views);
-		
+		rollNum("listedCompany", 0, data[0].people);
+		rollNum("listedSecurity", 0, data[0].serial);
+		rollNum("totalMarket", 0, data[0].coins);
+		rollNum("circulationMarket", 0, data[0].danmakus);
+		rollNum("shRatio", 0, data[0].comment);
+		rollNum("szRatio", 0, data[0].views);
 	}).fail(function(jqXHR, textStatus) {
 		console.log("Ajax Error: ", textStatus);
 	});
+	
+//	"people": 3574,
+//	"serial": 20018,
+//	"coins": 455294.1,
+//	"danmakus": 370447.9,
+//	"comment": 13.16,
+//	"views": 20.99	
 	
 	//获取排行数据
 	const rankChart = echarts.init(document.getElementById("rankChart"), "shine");
@@ -106,6 +112,7 @@ $(function() {
 		$("#rankChart").addClass("chart-done");
 	}).done(function(data) {
 		//console.log('Data: ', data);
+		//System.out.println(data);
 		const xData = [];
 		const yData = [];
 		for(let i in data) {
@@ -400,12 +407,12 @@ $(function() {
 		console.log("Ajax Fail: ", jqXHR.status, jqXHR.statusText);
 	});
 	
-	//获取CSRC行业分类数据
+	//风格分类
 	const csrcChart = echarts.init(document.getElementById("csrcChart"), "shine");
 	const csrcChartOpt = {
 		tooltip: {
 			trigger: "item",
-			formatter: "{b0}<br />股票数：{c0}<br />占比：{d0}%"
+			formatter: "{b0}<br />番剧数：{c0}<br />占比：{d0}%"
 		},
 		legend: {
 			type: "scroll",
@@ -422,7 +429,7 @@ $(function() {
 			}
 		},
 		series: [{
-			name: "CSRC行业分类",
+			name: "分类",
 			type: "pie",
 			center: ["47%", "55%"],
 			radius: ["30%", "85%"]
@@ -445,7 +452,7 @@ $(function() {
 		}
 		csrcChart.setOption({
 			series: [{
-				name: "CSRC行业分类",
+				name: "分类",
 				data: chartData
 			}]
 		});

@@ -47,7 +47,7 @@ public class rankSevlet extends HttpServlet {
 				  
 				String ranks = gson.toJson(lists);
 				
-				System.out.println(ranks);
+				//System.out.println(ranks);
 				response.setContentType("text/html;charset=UTF-8");
 				response.getWriter().print(ranks);
 	}
